@@ -1,8 +1,8 @@
 package ru.skillbranch.devintensive.test
 
-import ru.skillbranch.devintensive.extension.TimeUnits
-import ru.skillbranch.devintensive.extension.stripHtml
-import ru.skillbranch.devintensive.extension.truncate
+import ru.skillbranch.devintensive.extensions.TimeUnits
+import ru.skillbranch.devintensive.extensions.stripHtml
+import ru.skillbranch.devintensive.extensions.truncate
 import ru.skillbranch.devintensive.models.User
 import java.util.*
 
