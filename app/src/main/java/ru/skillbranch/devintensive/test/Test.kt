@@ -54,5 +54,8 @@ fun main() {
   println(toInitials(null,"Doe"))
   println(toInitials("John",null))
   println(toInitials(null,null))
+  println(toInitials(" "," "))
+  println(toInitials(""," "))
+  println(toInitials(" ",""))
 }
 

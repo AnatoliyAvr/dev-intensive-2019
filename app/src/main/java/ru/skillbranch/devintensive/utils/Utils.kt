@@ -175,11 +175,13 @@ object Utils {
 
   fun toInitials(firstName: String?, lastName: String?): String? {
     return when {
-      firstName.isNullOrEmpty() && lastName.isNullOrEmpty() -> null
-      firstName.isNullOrEmpty() -> lastName?.toUpperCase(Locale("ru"))?.get(0).toString()
-      lastName.isNullOrEmpty() -> firstName.toUpperCase(Locale("ru"))[0].toString()
-      else -> firstName.toUpperCase(Locale("ru"))[0].toString() +
-          lastName.toUpperCase(Locale("ru"))[0].toString()
+      firstName?.trim().isNullOrEmpty() && lastName?.trim().isNullOrEmpty() -> null
+      firstName?.trim().isNullOrEmpty() -> lastName?.toUpperCase(Locale("ru"))?.get(0).toString()
+      lastName?.trim().isNullOrEmpty() -> firstName!!.toUpperCase(Locale("ru"))[0].toString()
+      else -> firstName!!.trim().toUpperCase(Locale("ru"))[0].toString() +
+          lastName!!.trim().toUpperCase(Locale("ru"))[0].toString()
     }
   }
+
+
 }
