@@ -77,7 +77,7 @@ fun Date.humanizeDiff(date: Date = Date()): String {
     (date.time - this.time) / SECOND in -4500..2701 -> "чqас назад"
     (date.time - this.time) / SECOND in -79200..4501 -> "через  ${abs(n) / HOUR} ${hours((abs(n) / HOUR).toInt())}"
     (date.time - this.time) / SECOND in -93600..79201 -> "день назад"
-    (date.time - this.time) / SECOND in -31104000..93601 -> "через ${abs(n) / DAY} ${days((abs(n) / DAY).toInt())} "
+    (date.time - this.time) / SECOND in -31104000..93601 -> "через ${abs(n) / DAY} ${days((abs(n) / DAY).toInt())}"
     (date.time - this.time) / SECOND in -Int.MAX_VALUE..31104000 -> "более чем через год"
 
     else -> ""

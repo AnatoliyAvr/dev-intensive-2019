@@ -4,6 +4,7 @@ import ru.skillbranch.devintensive.extensions.TimeUnits
 import ru.skillbranch.devintensive.extensions.stripHtml
 import ru.skillbranch.devintensive.extensions.truncate
 import ru.skillbranch.devintensive.models.User
+import ru.skillbranch.devintensive.utils.Utils.toInitials
 import java.util.*
 
 
@@ -48,5 +49,9 @@ fun main() {
 
   println("<p class=\"title\">Образовательное IT-сообщество Skill Branch</p>".stripHtml()) //Образовательное IT-сообщество Skill Branch
   println("<p>Образовательное       IT-сообщество   Skill Branch</p>".stripHtml()) //Образовательное IT-сообщество Skill Branch
+
+  println(toInitials("John","Doe"))
+  println(toInitials(null,"Doe"))
+  println(toInitials("John",null))
 }
 
