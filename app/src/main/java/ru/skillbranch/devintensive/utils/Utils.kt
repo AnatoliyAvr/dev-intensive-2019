@@ -174,13 +174,12 @@ object Utils {
   }
 
   fun toInitials(firstName: String?, lastName: String?): String? {
-    val first = firstName?.toUpperCase(Locale("ru"))?.get(0).toString()
-    val last = lastName?.toUpperCase(Locale("ru"))?.get(0).toString()
     return when {
       firstName.isNullOrEmpty() && lastName.isNullOrEmpty() -> null
       firstName.isNullOrEmpty() -> lastName?.toUpperCase(Locale("ru"))?.get(0).toString()
       lastName.isNullOrEmpty() -> firstName.toUpperCase(Locale("ru"))[0].toString()
-      else -> first + last
+      else -> firstName.toUpperCase(Locale("ru"))[0].toString() +
+          lastName.toUpperCase(Locale("ru"))[0].toString()
     }
   }
 }
