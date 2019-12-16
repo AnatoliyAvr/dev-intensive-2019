@@ -43,31 +43,66 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
       } else {
         values()[0]
       }
-
     }
-
   }
 
   enum class Question(val question: String, val answer: List<String>) {
     NAME("Как меня зовут?", listOf("бендер", "bender")) {
       override fun nextQuestion(): Question = PROFESSION
+      override fun validate(str: String): String {
+        return if (str[0].isUpperCase()) {
+          str.toLowerCase()
+        } else {
+          return "Имя должно начинаться с заглавной буквы"
+        }
+      }
     },
     PROFESSION("Назови мою профессию?", listOf("сгибальщик", "bender")) {
       override fun nextQuestion(): Question = MATERIAL
+      override fun validate(str: String): String {
+        return if (str[0].isLowerCase())
+          str.toLowerCase()
+        else
+          return "Профессия должна начинаться со строчной буквы"
+
+      }
     },
     MATERIAL("Из чего я сделан?", listOf("метал", "железо", "дерево", "metal", "iron", "wood")) {
       override fun nextQuestion(): Question = BDAY
+      override fun validate(str: String): String {
+        return if ("\\d+".toRegex().findAll(str).none())
+          str.toLowerCase()
+        else
+          return "Материал не должен содержать цифр"
+      }
     },
     BDAY("Когда меня создали?", listOf("2993")) {
       override fun nextQuestion(): Question = SERIAL
+      override fun validate(str: String): String {
+        return if (str.matches("\\D+".toRegex()))
+          str.toLowerCase()
+        else
+          return "Год моего рождения должен содержать только цифры"
+      }
     },
     SERIAL("Мой серийный номер?", listOf("2716057")) {
       override fun nextQuestion(): Question = IDLE
+      override fun validate(str: String): String {
+        return if ("\\D+".toRegex().findAll(str).none() && str.length == 7)
+          str.toLowerCase()
+        else
+          "Серийный номер содержит только цифры, и их 7"
+      }
     },
     IDLE("На этом все, вопросов больше нет", listOf()) {
       override fun nextQuestion(): Question = IDLE
+      override fun validate(str: String): String {
+        return str
+      }
     };
 
+
     abstract fun nextQuestion(): Question
+    abstract fun validate(str: String): String
   }
 }
