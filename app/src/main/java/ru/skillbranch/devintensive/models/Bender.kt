@@ -2,6 +2,8 @@ package ru.skillbranch.devintensive.models
 
 class Bender(var status: Status = Status.NORMAL, var question: Question = Question.NAME) {
 
+  private var count = 0
+
   fun askQuestion(): String = when (question) {
     Question.NAME -> Question.NAME.question
     Question.PROFESSION -> Question.PROFESSION.question
@@ -17,8 +19,15 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
       question = question.nextQuestion()
       "Отлично - ты справился\n${question.question}" to status.color
     } else {
-      status = status.nestStatus()
-      "Это неправильный ответ\n${question.question}" to status.color
+      if (count++ == 2) {
+        count = 0
+        status = Status.NORMAL
+        question = Question.NAME
+        "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
+      } else {
+        status = status.nextStatus()
+        "Это неправильный ответ\n${question.question}" to status.color
+      }
     }
   }
 
@@ -28,7 +37,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
     DANGER(Triple(255, 60, 60)),
     CRITICAL(Triple(255, 0, 0));
 
-    fun nestStatus(): Status {
+    fun nextStatus(): Status {
       return if (this.ordinal < values().lastIndex) {
         values()[this.ordinal + 1]
       } else {
