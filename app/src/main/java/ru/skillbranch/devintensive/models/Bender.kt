@@ -15,7 +15,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
 
   fun listenAnswer(answer: String): Pair<String, Triple<Int, Int, Int>> {
 
-    return if (question.answer.contains(answer)) {
+    return if (question.answers.contains(answer)) {
       question = question.nextQuestion()
       "Отлично - ты справился\n${question.question}" to status.color
     } else {
@@ -46,63 +46,69 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
     }
   }
 
-  enum class Question(val question: String, val answer: List<String>) {
+  enum class Question(val question: String, val answers: List<String>) {
     NAME("Как меня зовут?", listOf("бендер", "bender")) {
       override fun nextQuestion(): Question = PROFESSION
-      override fun validate(str: String): String {
-        return if (str[0].isUpperCase()) {
-          str.toLowerCase()
+      override fun validate(text: String): Pair<Boolean, String> {
+        return if (text.isNotEmpty() && text[0].isUpperCase()) {
+          true to text.toLowerCase()
         } else {
-          return "Имя должно начинаться с заглавной буквы"
+          false to "Имя должно начинаться с заглавной буквы"
         }
       }
     },
     PROFESSION("Назови мою профессию?", listOf("сгибальщик", "bender")) {
       override fun nextQuestion(): Question = MATERIAL
-      override fun validate(str: String): String {
-        return if (str[0].isLowerCase())
-          str.toLowerCase()
-        else
-          return "Профессия должна начинаться со строчной буквы"
-
+      override fun validate(text: String): Pair<Boolean, String> {
+        return if (text.isNotEmpty() && text[0].isLowerCase()) {
+          true to text.toLowerCase()
+        } else {
+          false to "Профессия должна начинаться со строчной буквы"
+        }
       }
     },
-    MATERIAL("Из чего я сделан?", listOf("метал", "железо", "дерево", "metal", "iron", "wood")) {
+    MATERIAL("Из чего я сделан?", listOf("металл", "дерево", "metal", "iron", "wood")) {
       override fun nextQuestion(): Question = BDAY
-      override fun validate(str: String): String {
-        return if ("\\d+".toRegex().findAll(str).none())
-          str.toLowerCase()
-        else
-          return "Материал не должен содержать цифр"
+      override fun validate(text: String): Pair<Boolean, String> {
+        val reg = Regex("\\d+")
+        return if (reg.findAll(text).none()) {
+          true to text.toLowerCase()
+        } else {
+          false to "Материал не должен содержать цифр"
+        }
       }
     },
     BDAY("Когда меня создали?", listOf("2993")) {
       override fun nextQuestion(): Question = SERIAL
-      override fun validate(str: String): String {
-        return if (str.matches("\\D+".toRegex()))
-          str.toLowerCase()
-        else
-          return "Год моего рождения должен содержать только цифры"
+      override fun validate(text: String): Pair<Boolean, String> {
+        val reg = Regex("\\D+")
+        return if (reg.findAll(text).none()) {
+          true to text.toLowerCase()
+        } else {
+          false to "Год моего рождения должен содержать только цифры"
+        }
       }
     },
-    SERIAL("Мой серийный номер?", listOf("2716057")) {
+    SERIAL("Мой серийный номер?", listOf("2716057"))  {
       override fun nextQuestion(): Question = IDLE
-      override fun validate(str: String): String {
-        return if ("\\D+".toRegex().findAll(str).none() && str.length == 7)
-          str.toLowerCase()
-        else
-          "Серийный номер содержит только цифры, и их 7"
+      override fun validate(text: String): Pair<Boolean, String> {
+        val reg = Regex("\\D+")
+        return if (reg.findAll(text).none() && text.length == 7) {
+          true to text.toLowerCase()
+        } else {
+          false to "Серийный номер содержит только цифры, и их 7"
+        }
       }
     },
-    IDLE("На этом все, вопросов больше нет", listOf()) {
+    IDLE("На этом все, вопросов больше нет", listOf())  {
       override fun nextQuestion(): Question = IDLE
-      override fun validate(str: String): String {
-        return str
+      override fun validate(text: String): Pair<Boolean, String> {
+        return true to text
       }
     };
 
-
     abstract fun nextQuestion(): Question
-    abstract fun validate(str: String): String
+    abstract fun validate(text: String): Pair<Boolean, String>
+
   }
 }
