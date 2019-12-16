@@ -183,5 +183,12 @@ object Utils {
     }
   }
 
+//  fun toInitials(firstName: String?, lastName: String?): String? {
+//    if (firstName.isNullOrBlank() && lastName.isNullOrBlank()) {
+//      return null
+//    }
+//    return "${if (!firstName.isNullOrBlank()) firstName.toUpperCase().trim()[0] else ""}${if (!lastName.isNullOrBlank()) lastName.toUpperCase().trim()[0] else ""}"
+//  }
+
 
 }
