@@ -5,3 +5,5 @@ libs/
 *.iml
 src/test/
 src/androidTest
+src/main/java/ru/skillbranch/devintensive/car
+src/main/java/ru/skillbranch/devintensive/test
