@@ -12,6 +12,15 @@ fun main() {
 
 
   println(validate("dsds"))
+
+  val setMotor = 4000
+
+  val b = false
+
+  if (!b && setMotor > 2700)
+    println("2700")
+  else
+    println(setMotor)
 }
 
 fun validate(str: String): String {

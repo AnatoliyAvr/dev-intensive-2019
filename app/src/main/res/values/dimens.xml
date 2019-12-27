@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!--  font size -->
-  <dimen name="font_large_24">24sp</dimen>
+  <dimen name="font_large_20">20sp</dimen>
   <dimen name="font_normal_16">16sp</dimen>
   <dimen name="font_small_12">12sp</dimen>
 
@@ -15,4 +15,7 @@
 
   <dimen name="image_btn_size_24">24dp</dimen>
   <dimen name="image_btn_size_16">16dp</dimen>
+  <dimen name="btn_round_size_40">40dp</dimen>
+  <dimen name="avatar_round_size">112dp</dimen>
+  <dimen name="space_maximum_72">72dp</dimen>
 </resources>
