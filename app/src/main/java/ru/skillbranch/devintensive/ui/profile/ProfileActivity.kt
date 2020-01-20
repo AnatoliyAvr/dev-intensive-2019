@@ -64,8 +64,8 @@ class ProfileActivity : AppCompatActivity() {
   }
 
   private fun updateThem(mode: Int) {
-    Log.d("M_ProfileActivity", "updateThem")
     delegate.localNightMode = mode
+    Log.d("M_ProfileActivity", "updateThem")
   }
 
   private fun initViews(savedInstanceState: Bundle?) {
