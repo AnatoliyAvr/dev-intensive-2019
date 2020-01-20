@@ -33,7 +33,7 @@ class ProfileActivity : AppCompatActivity() {
     setContentView(R.layout.activity_profile)
     initViews(savedInstanceState)
     initViewModel()
-    Log.d("M_ProfileActivity","onCreate")
+    Log.d("M_ProfileActivity", "onCreate")
   }
 
   override fun onSaveInstanceState(outState: Bundle) {
@@ -45,6 +45,14 @@ class ProfileActivity : AppCompatActivity() {
     viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
     viewModel.getProfileData().observe(this, Observer { updateUI(it) })
     viewModel.getTheme().observe(this, Observer { updateThem(it) })
+    /***
+    Рекомендуемое решение состоит в том, чтобы использовать getViewLifecycleOwner() или
+    getViewLifecycleOwnerLiveData() из жизненного цикла фрагмента, которые были добавлены
+    в библиотеку  поддержки 28.0.0 и AndroidX 1.0.0, так что LiveData будет удалять наблюдателей
+    при каждом уничтожении View фрагмента:
+    viewModel.getTheme().observe(viewLifecycleOwner, Observer { updateThem(it) })
+    https://teletype.in/@skillbranch/ryP1TISrH
+     ***/
   }
 
   private fun updateUI(profile: Profile) {
@@ -56,7 +64,7 @@ class ProfileActivity : AppCompatActivity() {
   }
 
   private fun updateThem(mode: Int) {
-    Log.d("M_ProfileActivity","updateThem")
+    Log.d("M_ProfileActivity", "updateThem")
     delegate.localNightMode = mode
   }
 
