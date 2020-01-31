@@ -42,5 +42,4 @@ class ProfileViewModel : ViewModel() {
 
     repository.saveAppTheme(appTheme.value!!)
   }
-
 }

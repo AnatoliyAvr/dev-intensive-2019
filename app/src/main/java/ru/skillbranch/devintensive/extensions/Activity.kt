@@ -9,8 +9,6 @@ import android.content.Context
 import android.util.TypedValue
 import kotlin.math.roundToInt
 
-
-
 fun Activity.hideKeyboard() {
   val imm =
     getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
