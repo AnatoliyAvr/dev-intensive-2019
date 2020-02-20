@@ -20,10 +20,9 @@ class CircleImageView @JvmOverloads constructor(
   }
 
   private var borderColor = DEFAULT_BORDER_COLOR
-  private var borderWidth = context.dpToPx( 2F)
+  private var borderWidth = context.dpToPx(2F)
   private val borderPaint = Paint(Paint.ANTI_ALIAS_FLAG)
   private val circlePaint = Paint(Paint.ANTI_ALIAS_FLAG)
   private val srcMode = PorterDuffXfermode(Mode.SRC)
   private val srcInMode = PorterDuffXfermode(Mode.SRC_IN)
-
 }

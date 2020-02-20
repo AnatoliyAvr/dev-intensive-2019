@@ -1,19 +1,46 @@
 package ru.skillbranch.devintensive.models.data
 
-import ru.skillbranch.devintensive.test.UserTest
+import ru.skillbranch.devintensive.extensions.humanizeDiff
 import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
 
 data class User constructor(
-  val id : String,
-  var firstName : String?,
-  var lastName : String?,
-  var avatar : String?,
-  var rating : Int = 0,
-  var respect : Int = 0,
-  var lastVisit : Date? = Date(),
-  var isOnline : Boolean = false
+  val id: String,
+  var firstName: String?,
+  var lastName: String?,
+  var avatar: String?,
+  var rating: Int = 0,
+  var respect: Int = 0,
+  var lastVisit: Date? = Date(),
+  var isOnline: Boolean = false
 ) {
+
+  fun toUserItem(): UserItem {
+    val lastActivity = when {
+      lastVisit == null -> "Еще ни разу не заходил"
+      isOnline -> "online"
+      else -> "Последний раз был ${lastVisit?.humanizeDiff()}"
+    }
+
+    return UserItem(
+      id,
+      "${firstName.orEmpty()} ${lastName.orEmpty()}",
+      Utils.toInitials(firstName, lastName),
+      avatar,
+      lastActivity,
+      false,
+      isOnline
+    )
+  }
+
+  constructor(id: String, firstName: String?, lastName: String?) : this(
+    id = id,
+    firstName = firstName,
+    lastName = lastName,
+    avatar = null
+  )
+
+  constructor(id: String) : this(id, "John", "Doe")
 
   private constructor(builder: Builder) : this(
     builder.id,
@@ -65,12 +92,12 @@ data class User constructor(
 
   companion object Factory {
     private var lastId = -1
-    fun makeUser(fullname: String?): UserTest {
+    fun makeUser(fullName: String?): User {
       lastId++
 
-      val (firstName, lastName) = Utils.parseFullName(fullname)
+      val (firstName, lastName) = Utils.parseFullName(fullName)
 
-      return UserTest(
+      return User(
         id = "$lastId",
         firstName = firstName,
         lastName = lastName

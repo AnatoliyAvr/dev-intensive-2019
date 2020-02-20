@@ -1,10 +1,10 @@
 package ru.skillbranch.devintensive.extensions
 
-import ru.skillbranch.devintensive.test.UserTest
-import ru.skillbranch.devintensive.models.data.UserView
+import ru.skillbranch.devintensive.models.UserView
+import ru.skillbranch.devintensive.models.data.User
 import ru.skillbranch.devintensive.utils.Utils
 
-fun UserTest.toUserView(): UserView {
+fun User.toUserView(): UserView {
 
   val nickname = Utils.transliteration("$firstName $lastName")
   val initials = Utils.toInitials(firstName, lastName)

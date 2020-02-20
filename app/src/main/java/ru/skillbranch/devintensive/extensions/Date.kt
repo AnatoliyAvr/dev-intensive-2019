@@ -14,7 +14,7 @@ fun Date.format(pattern: String = "HH:mm:ss dd.MM.yy"): String {
   return dateFormat.format(this)
 }
 
-fun Date.sohrtFormat(): String {
+fun Date.shortFormat(): String {
   val pattern = if (this.isSameDay(Date())) "HH:mm" else "dd.MM.yy"
   val dateFormat = SimpleDateFormat(pattern, Locale("ru"))
   return dateFormat.format(this)

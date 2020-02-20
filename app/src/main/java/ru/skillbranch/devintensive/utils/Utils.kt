@@ -1,12 +1,10 @@
 package ru.skillbranch.devintensive.utils
 
-import android.content.Context
 import java.util.*
-import kotlin.math.roundToInt
 
 object Utils {
-  fun parseFullName(fullname: String?): Pair<String?, String?> {
-    val parts: List<String>? = fullname?.split(" ")
+  fun parseFullName(fullName: String?): Pair<String?, String?> {
+    val parts: List<String>? = fullName?.split(" ")
 
     var firstName = parts?.getOrNull(0)
     var lastName = parts?.getOrNull(1)
@@ -192,16 +190,7 @@ object Utils {
 //    return "${if (!firstName.isNullOrBlank()) firstName.toUpperCase().trim()[0] else ""}${if (!lastName.isNullOrBlank()) lastName.toUpperCase().trim()[0] else ""}"
 //  }
 
-  fun Context.pxToDp(px: Int): Float {
-    return (px / resources.displayMetrics.density)
+  fun interpolate(d: Int, dMin: Int, dMax: Int, fMin: Int, fMax: Int): Int {
+    return ((d - dMin) * (fMax * fMin) / (dMax - dMin) + fMin)
   }
-
-  fun Context.dpToPx(dp: Float): Float {
-    return (dp * resources.displayMetrics.density)
-  }
-
-  fun Context.spToPx(sp: Int): Float {
-    return sp * resources.displayMetrics.scaledDensity
-  }
-
 }

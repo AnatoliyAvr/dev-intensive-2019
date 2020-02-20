@@ -1,12 +1,17 @@
 package ru.skillbranch.devintensive.models.data
 
-data class ChatItem(
+import ru.skillbranch.devintensive.models.data.ChatType
+
+
+data class ChatItem (
   val id: String,
-  var avatar: String?,
-  var initials: String,
-  var title: String,
-  var shortDescription: String?,
-  var messageCount: Int = 0,
-  var lastMessageDate: String?,
-  var isOnline: Boolean = false
+  val avatar: String?,
+  val initials: String,
+  val title: String,
+  val shortDescription: String?,
+  val messageCount: Int = 0,
+  val lastMessageDate: String?,
+  val isOnline: Boolean = false,
+  val chatType : ChatType = ChatType.SINGLE,
+  var author :String? = null
 )

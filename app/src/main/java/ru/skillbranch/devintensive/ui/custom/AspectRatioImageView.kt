@@ -3,7 +3,7 @@ package ru.skillbranch.devintensive.ui.custom
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.ImageView
-import ru.skillbranch.devintensive.R
+import by.tolikavr.dev_intensive_recycler_view.R
 
 class AspectRatioImageView @JvmOverloads constructor(
   context: Context,
