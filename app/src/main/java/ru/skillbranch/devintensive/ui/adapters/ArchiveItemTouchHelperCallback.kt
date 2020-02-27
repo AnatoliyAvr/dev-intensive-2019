@@ -1,6 +1,7 @@
 package ru.skillbranch.devintensive.ui.adapters
 
 import android.graphics.*
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -10,8 +11,8 @@ import ru.skillbranch.devintensive.utils.Utils
 import kotlin.math.abs
 
 
-class ChatItemTouchHelperCallback(
-  private val adapter: ChatAdapter,
+class ArchiveItemTouchHelperCallback(
+  private val adapter: ArchiveAdapter,
   private val swipeListener: (ChatItem) -> Unit
 ) : ItemTouchHelper.Callback() {
 
@@ -24,7 +25,7 @@ class ChatItemTouchHelperCallback(
     viewHolder: RecyclerView.ViewHolder
   ): Int {
     return if (viewHolder is ItemTouchViewHolder) {
-      makeFlag(ItemTouchHelper.ACTION_STATE_SWIPE, ItemTouchHelper.START)
+      makeFlag(ItemTouchHelper.ACTION_STATE_SWIPE, ItemTouchHelper.END)
     } else {
       makeFlag(ItemTouchHelper.ACTION_STATE_IDLE, ItemTouchHelper.START)
     }
@@ -70,15 +71,15 @@ class ChatItemTouchHelperCallback(
   }
 
   private fun drawIcon(canvas: Canvas, itemView: View, dX: Float) {
-    val icon = itemView.resources.getDrawable(R.drawable.ic_archive_black_24dp, itemView.context.theme)
+    val icon = itemView.resources.getDrawable(R.drawable.ic_unarchive_black_24dp, itemView.context.theme)
     val iconSize = itemView.resources.getDimensionPixelSize(R.dimen.icon_size)
     val space = itemView.resources.getDimensionPixelSize(R.dimen.spacing_normal_16)
 
     val margin = (itemView.bottom - itemView.top - iconSize) / 2
     with(iconBounds) {
-      left = itemView.right + dX.toInt() + space
+      left = itemView.left + dX.toInt() - iconSize - space
       top = itemView.top + margin
-      right = itemView.right + dX.toInt() + iconSize + space
+      right = itemView.left + dX.toInt() - space
       bottom = itemView.bottom - margin
     }
 
@@ -88,9 +89,9 @@ class ChatItemTouchHelperCallback(
 
   private fun drawBackground(canvas: Canvas, itemView: View, dX: Float) {
     with(bgRect) {
-      left = itemView.left + dX
+      left = itemView.left.toFloat()
       top = itemView.top.toFloat()
-      right = itemView.right.toFloat()
+      right = itemView.right.toFloat() + dX
       bottom = itemView.bottom.toFloat()
     }
 

@@ -1,8 +1,8 @@
 package ru.skillbranch.devintensive.repositories
 
 import androidx.lifecycle.MutableLiveData
-import ru.skillbranch.devintensive.models.data.Chat
 import ru.skillbranch.devintensive.data.managers.CacheManager
+import ru.skillbranch.devintensive.models.data.Chat
 
 object ChatRepository {
 
@@ -10,6 +10,15 @@ object ChatRepository {
 
   fun loadChats(): MutableLiveData<List<Chat>> {
     return chats
+  }
+
+  fun add() {
+    val chat = Chat(id = "33", title = "qwe")
+    val copy = chats.value!!.toMutableList()
+    val ind = chats.value!!.indexOfFirst { it.id == chat.id }
+    if (ind == -1) return
+    copy[ind] = chat
+    chats.value = copy
   }
 
   fun update(chat: Chat) {

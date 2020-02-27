@@ -1,4 +1,4 @@
-package ru.skillbranch.devintensive.ui.group
+package ru.skillbranch.devintensive.ui.activitys
 
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -14,17 +14,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.tolikavr.dev_intensive_recycler_view.R
-import ru.skillbranch.devintensive.models.data.UserItem
-import ru.skillbranch.devintensive.ui.adapters.UserAdapter
-import ru.skillbranch.devintensive.ui.custom.LinearItemDecoration
-import ru.skillbranch.devintensive.viewmodels.GroupViewModel
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.activity_group.*
+import ru.skillbranch.devintensive.models.data.UserItem
+import ru.skillbranch.devintensive.ui.adapters.UserAdapter
+import ru.skillbranch.devintensive.ui.custom.LinearItemDecoration
+import ru.skillbranch.devintensive.viewmodels.GroupViewModel
 
 class GroupActivity : AppCompatActivity() {
 
@@ -75,6 +73,7 @@ class GroupActivity : AppCompatActivity() {
   }
 
   private fun initViews() {
+//    userAdapter = UserAdapter { viewModel.handleSelectedItem(it.id) }
     userAdapter = UserAdapter { viewModel.handleSelectedItem(it.id) }
     val divider = LinearItemDecoration()
     with(rv_user_list) {
@@ -110,7 +109,7 @@ class GroupActivity : AppCompatActivity() {
       if (user.avatar != null) {
         Glide.with(context)
           .load(user.avatar)
-          .transform(CenterCrop(), RoundedCorners(1000))
+          .circleCrop()
           .into(object : CustomTarget<Drawable>() {
             override fun onLoadCleared(placeholder: Drawable?) {}
             override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {

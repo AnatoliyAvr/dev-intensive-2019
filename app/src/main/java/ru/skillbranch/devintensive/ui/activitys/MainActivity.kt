@@ -1,4 +1,4 @@
-package ru.skillbranch.devintensive.ui.main
+package ru.skillbranch.devintensive.ui.activitys
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,14 +11,16 @@ import androidx.lifecycle.*
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.tolikavr.dev_intensive_recycler_view.R
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.item_chat_single.view.*
+import ru.skillbranch.devintensive.extensions.applyThemeColors
+import ru.skillbranch.devintensive.models.data.ChatType
 import ru.skillbranch.devintensive.models.data.User
 import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
 import ru.skillbranch.devintensive.ui.adapters.ChatItemTouchHelperCallback
 import ru.skillbranch.devintensive.ui.custom.LinearItemDecoration
-import ru.skillbranch.devintensive.ui.group.GroupActivity
 import ru.skillbranch.devintensive.viewmodels.MainViewModel
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -71,8 +73,12 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun initViews() {
+
     chatAdapter = ChatAdapter {
-      Snackbar.make(rv_chat_list, "Click on ${it.title}", Snackbar.LENGTH_LONG).show()
+      when (it.chatType) {
+        ChatType.ARCHIVE -> startActivity(Intent(this, ArchiveActivity::class.java))
+        else -> Snackbar.make(rv_chat_list, "Click on ${it.title}", Snackbar.LENGTH_LONG).applyThemeColors().show()
+      }
     }
 
     val divider = LinearItemDecoration()

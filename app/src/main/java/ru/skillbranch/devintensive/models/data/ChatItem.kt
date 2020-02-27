@@ -1,17 +1,37 @@
 package ru.skillbranch.devintensive.models.data
 
-import ru.skillbranch.devintensive.models.data.ChatType
-
-
-data class ChatItem (
+data class ChatItem constructor(
   val id: String,
-  val avatar: String?,
-  val initials: String,
+  val avatar: String? = "??",
+  val initials: String = "??",
   val title: String,
-  val shortDescription: String?,
+  val shortDescription: String? = "??",
   val messageCount: Int = 0,
-  val lastMessageDate: String?,
+  val lastMessageDate: String? = "??",
   val isOnline: Boolean = false,
-  val chatType : ChatType = ChatType.SINGLE,
-  var author :String? = null
-)
+  val chatType: ChatType = ChatType.SINGLE,
+  var author: String? = null
+) {
+
+  companion object {
+    fun archiveItem(
+      shortDescription: String?,
+      messageCount: Int,
+      lastMessageDate: String?,
+      author: String?
+    ): ChatItem {
+      return ChatItem(
+        "-1",
+        null,
+        "",
+        "Архив чатов",
+        shortDescription,
+        messageCount,
+        lastMessageDate,
+        false,
+        ChatType.ARCHIVE,
+        author
+      )
+    }
+  }
+}

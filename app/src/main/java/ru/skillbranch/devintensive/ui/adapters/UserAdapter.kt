@@ -57,7 +57,7 @@ class UserAdapter(private val listener: (UserItem) -> Unit) : RecyclerView.Adapt
         .load(user.avatar)
         .into(iv_avatar_user)
 
-      sv_indicator.visibility = if (user.isOnline) View.VISIBLE else View.GONE
+      sv_indicator_user.visibility = if (user.isOnline) View.VISIBLE else View.GONE
       tv_user_name.text = user.fullName
       tv_last_activity.text = user.lastActivity
       iv_selected.visibility = if (user.isSelected) View.VISIBLE else View.GONE
