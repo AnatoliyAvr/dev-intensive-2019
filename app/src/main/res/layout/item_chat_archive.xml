@@ -8,11 +8,10 @@
 
   <ru.skillbranch.devintensive.ui.custom.AvatarImageView
     android:id="@+id/iv_avatar_archive"
-    android:src="@drawable/ic_unarchive_black_24dp"
-    android:background="@drawable/bg_ic_avatar"
     android:layout_width="@dimen/avatar_item_size"
     android:layout_height="@dimen/avatar_item_size"
-    android:layout_alignParentStart="true" />
+    android:background="@drawable/bg_ic_avatar"
+    android:src="@drawable/ic_unarchive_black" />
 
   <View
     android:id="@+id/sv_indicator_archive"

@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
   <item>
     <shape android:shape="oval">
       <solid android:color="@color/color_gray" />
     </shape>
   </item>
-</selector>
+</layer-list>
+
+
+<!--  <?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<item>
+  <shape android:shape="oval">
+    <solid android:color="@color/color_gray" />
+  </shape>
+</item>
+<item
+  android:left="8dp"
+  android:top="8dp"
+  android:bottom="8dp"
+  android:right="8dp">
+  <bitmap android:src="@drawable/ic_unarchive_black_24dp" />
+</item>
+
+</layer-list>-->

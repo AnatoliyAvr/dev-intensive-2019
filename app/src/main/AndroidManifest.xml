@@ -20,8 +20,8 @@
       </intent-filter>
     </activity>
 
-    <activity android:name="ru.skillbranch.devintensive.ui.activitys.ArchiveActivity"></activity>
-    <activity android:name="ru.skillbranch.devintensive.ui.activitys.GroupActivity"></activity>
+    <activity android:name="ru.skillbranch.devintensive.ui.activitys.ArchiveActivity" />
+    <activity android:name="ru.skillbranch.devintensive.ui.activitys.GroupActivity" />
   </application>
 
 </manifest>

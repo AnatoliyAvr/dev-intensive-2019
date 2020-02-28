@@ -1,6 +1,7 @@
 package ru.skillbranch.devintensive.ui.custom
 
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.Drawable
@@ -22,6 +23,7 @@ import by.tolikavr.dev_intensive_recycler_view.R
 import ru.skillbranch.devintensive.extensions.dpToPx
 import kotlin.math.max
 
+@SuppressLint("AppCompatCustomView")
 class AvatarImageView @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
@@ -30,7 +32,6 @@ class AvatarImageView @JvmOverloads constructor(
 
   companion object {
     private const val DEFAULT_BORDER_WIDTH = 2
-    private const val DEFAULT_BORDER_PADDING = 40
     private const val DEFAULT_BORDER_COLOR = Color.WHITE
     private const val DEFAULT_SIZE = 40
 
